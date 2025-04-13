@@ -1,9 +1,13 @@
 import streamlit as st
+import os
 import pickle
 import pandas as pd
 
+# Safely construct relative path
+model_path = os.path.join("notebooks", "best_model.pkl")
+
 # Load model
-with open("../notebooks/best_model.pkl", "rb") as f:
+with open(model_path, "rb") as f:
     model = pickle.load(f)
 
 st.title("AI Resume Evaluator")
