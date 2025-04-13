@@ -1,6 +1,9 @@
 pandas
 numpy
 matplotlib
-warnings 
-scikit-learn
 seaborn
+scikit-learn
+xgboost
+joblib
+streamlit
+scipy
