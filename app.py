@@ -24,19 +24,25 @@ job_role = st.selectbox("Job Role", ["Data Scientist", "ML Engineer", "Analyst"]
 education = st.selectbox("Education", ["Bachelor", "Master", "PhD"])
 certification = st.selectbox("Certification", ["Yes", "No"])
 
-# Create input DataFrame
+# Create input DataFrame with the same columns as your training data
 input_data = pd.DataFrame({
     'Experience (Years)': [experience],
-    'AI Score': [ai_score],
-    'Salary Expectation': [salary],
-    'Project Count': [projects],
+    'AI Score (0-100)': [ai_score], 
+    'Salary Expectation ($)': [salary],
+    'Projects Count': [projects],
     
+
     'Job Role_ML Engineer': [1 if job_role == 'ML Engineer' else 0],
     'Job Role_Analyst': [1 if job_role == 'Analyst' else 0],
     'Education_Master': [1 if education == 'Master' else 0],
     'Education_PhD': [1 if education == 'PhD' else 0],
-    'Certification_Yes': [1 if certification == 'Yes' else 0],
+    'Certifications_Yes': [1 if certification == 'Yes' else 0],
 })
+
+expected_columns = model.feature_names_in_
+
+# Align input_data with the model's expected columns
+input_data = input_data.reindex(columns=expected_columns, fill_value=0)
 
 # Predict
 prediction = model.predict(input_data)[0]
